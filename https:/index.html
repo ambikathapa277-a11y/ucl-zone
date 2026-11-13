@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UCL ZONE | Champions League</title>
+
+<style>
+:root {
+  --bg:#050d1b;
+  --card:#0e1b30;
+  --card2:#142642;
+  --gold:#f5c451;
+  --blue:#1677ff;
+  --text:#ffffff;
+  --muted:#9babc1;
+  --line:#233957;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;
+ background:var(--bg);
+ color:var(--text);
+ font-family:Arial,Helvetica,sans-serif;
+}
+header{
+ background:#081426;
+ border-bottom:1px solid var(--line);
+ position:sticky;
+ top:0;
+ z-index:10;
+}
+nav{
+ max-width:1200px;
+ margin:auto;
+ padding:17px 20px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:15px;
+}
+.logo{
+ font-size:25px;
+ font-weight:900;
+ letter-spacing:1px;
+}
+.logo span{color:var(--gold)}
+.links{
+ display:flex;
+ gap:19px;
+ flex-wrap:wrap;
+}
+.links a{
+ color:var(--muted);
+ text-decoration:none;
+ font-size:13px;
+ font-weight:bold;
+}
+.links a:hover{color:var(--gold)}
+.container{
+ max-width:1200px;
+ margin:auto;
+ padding:20px;
+}
+.hero{
+ min-height:260px;
+ border:1px solid #294b76;
+ border-radius:18px;
+ padding:35px;
+ display:flex;
+ align-items:center;
+ background:
+ linear-gradient(90deg,rgba(3,12,29,.96),rgba(3,12,29,.45)),
+ radial-gradient(circle at 80% 40%,#174c92,#0b1a35 65%);
+}
+.hero h1{
+ font-size:clamp(35px,6vw,65px);
+ margin:10px 0;
+ line-height:1;
+}
+.hero p{color:var(--muted);line-height:1.6}
+.hero small{color:var(--gold);font-weight:bold;letter-spacing:2px}
+.btn{
+ display:inline-block;
+ background:var(--gold);
+ color:#111;
+ padding:12px 19px;
+ border-radius:8px;
+ text-decoration:none;
+ font-weight:bold;
+ margin-top:10px;
+}
+.section{margin-top:35px}
+.heading{
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ margin-bottom:16px;
+}
+.heading h2{font-size:23px;margin:0}
+.heading span{color:var(--muted);font-size:12px}
+.card{
+ background:var(--card);
+ border:1px solid var(--line);
+ border-radius:13px;
+ padding:17px;
+}
+.match-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:13px;
+}
+.match-top{
+ display:flex;
+ justify-content:space-between;
+ color:var(--muted);
+ font-size:11px;
+ margin-bottom:18px;
+}
+.live{color:#ff5265;font-weight:bold}
+.teams{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:8px;
+ text-align:center;
+}
+.team{
+ flex:1;
+ font-weight:bold;
+ font-size:13px;
+}
+.crest{font-size:30px;margin-bottom:8px}
+.score{font-size:24px;font-weight:900}
+.filters{
+ display:flex;
+ gap:8px;
+ flex-wrap:wrap;
+}
+.filters button{
+ background:var(--card2);
+ border:1px solid var(--line);
+ color:white;
+ padding:9px 13px;
+ border-radius:8px;
+ cursor:pointer;
+}
+.filters button.active{
+ background:var(--gold);
+ color:#111;
+}
+.news-grid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:14px;
+}
+.news-image{
+ height:130px;
+ background:linear-gradient(135deg,#153b68,#101a30);
+ display:grid;
+ place-items:center;
+ font-size:48px;
+ border-radius:9px;
+}
+.news-card h3{font-size:17px}
+.news-card p{
+ color:var(--muted);
+ font-size:13px;
+ line-height:1.6;
+}
+.tag{
+ color:var(--gold);
+ font-size:10px;
+ font-weight:bold;
+}
+table{
+ width:100%;
+ border-collapse:collapse;
+ background:var(--card);
+ border-radius:12px;
+ overflow:hidden;
+}
+th,td{
+ padding:13px 10px;
+ text-align:left;
+ border-bottom:1px solid var(--line);
+ font-size:13px;
+}
+th{color:var(--muted);font-size:11px}
+td:first-child{color:var(--gold)}
+footer{
+ text-align:center;
+ padding:30px 15px;
+ color:var(--muted);
+ border-top:1px solid var(--line);
+ margin-top:40px;
+ font-size:12px;
+}
+.notice{
+ margin-top:25px;
+ padding:14px;
+ background:#292315;
+ border:1px solid #66532a;
+ border-radius:10px;
+ color:#f1d99e;
+ font-size:12px;
+ line-height:1.6;
+}
+@media(max-width:750px){
+ nav{align-items:flex-start;flex-direction:column}
+ .links{gap:14px}
+ .match-grid,.news-grid{grid-template-columns:1fr}
+ .hero{padding:25px}
+ .heading{align-items:flex-start;gap:12px;flex-direction:column}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<nav>
+ <div class="logo">⚽ UCL <span>ZONE</span></div>
+ <div class="links">
+  <a href="#home">HOME</a>
+  <a href="#scores">LIVE SCORES</a>
+  <a href="#news">NEWS</a>
+  <a href="#fixtures">FIXTURES</a>
+  <a href="#table">STANDINGS</a>
+ </div>
+</nav>
+</header>
+
+<main class="container">
+
+<section class="hero" id="home">
+ <div>
+  <small>UEFA CHAMPIONS LEAGUE</small>
+  <h1>THE HOME OF<br>CHAMPIONS.</h1>
+  <p>Live football scores, breaking news, fixtures<br>and everything Champions League.</p>
+  <a class="btn" href="#scores">EXPLORE MATCHES →</a>
+ </div>
+</section>
+
+<section class="section" id="scores">
+ <div class="heading">
+  <div>
+   <h2>🔴 Match Centre</h2>
+   <span>Champions League matches</span>
+  </div>
+  <div class="filters">
+   <button class="active" onclick="filterMatches('all',this)">All</button>
+   <button onclick="filterMatches('live',this)">Live</button>
+   <button onclick="filterMatches('upcoming',this)">Upcoming</button>
+   <button onclick="filterMatches('finished',this)">Finished</button>
+  </div>
+ </div>
+ <div class="match-grid" id="matches"></div>
+</section>
+
+<section class="section" id="news">
+ <div class="heading">
+  <div>
+   <h2>📰 Latest Football News</h2>
+   <span>Latest headlines</span>
+  </div>
+ </div>
+ <div class="news-grid" id="newsList"></div>
+</section>
+
+<section class="section" id="fixtures">
+ <div class="heading">
+  <div>
+   <h2>📅 Upcoming Fixtures</h2>
+   <span>Next Champions League matchdays</span>
+  </div>
+ </div>
+ <div class="match-grid" id="fixtureList"></div>
+</section>
+
+<section class="section" id="table">
+ <div class="heading">
+  <div>
+   <h2>🏆 League Standings</h2>
+   <span>Sample table layout</span>
+  </div>
+ </div>
+ <div style="overflow-x:auto">
+ <table>
+  <thead>
+   <tr>
+    <th>#</th><th>TEAM</th><th>MP</th>
+    <th>W</th><th>D</th><th>L</th><th>PTS</th>
+   </tr>
+  </thead>
+  <tbody id="standings"></tbody>
+ </table>
+ </div>
+</section>
+
+<div class="notice">
+ <b>Note:</b> This first version uses sample data.
+ Live scores, verified news and official standings
+ will require a football data API and secure backend.
+</div>
+
+</main>
+
+<footer>
+ <b>UCL ZONE</b><br><br>
+ Your Champions League destination ⚽<br><br>
+ Independent fan project. Not affiliated with UEFA.
+</footer>
+
+<script>
+
+// MATCH DATA
+// Change this data when you want to update matches.
+
+const matches = [
+ {
+  home:"Arsenal",away:"Dortmund",
+  h:"-",a:"-",date:"24 NOV",
+  time:"21:00 CET",status:"upcoming",
+  e1:"🔴",e2:"🟡"
+ },
+ {
+  home:"Man City",away:"Napoli",
+  h:"-",a:"-",date:"24 NOV",
+  time:"21:00 CET",status:"upcoming",
+  e1:"🔵",e2:"🔵"
+ },
+ {
+  home:"Real Madrid",away:"PSV",
+  h:"-",a:"-",date:"24 NOV",
+  time:"21:00 CET",status:"upcoming",
+  e1:"⚪",e2:"🔴"
+ },
+ {
+  home:"Barcelona",away:"Sabah",
+  h:"-",a:"-",date:"25 NOV",
+  time:"18:45 CET",status:"upcoming",
+  e1:"🔴",e2:"🟡"
+ },
+ {
+  home:"Liverpool",away:"Club Brugge",
+  h:"-",a:"-",date:"25 NOV",
+  time:"21:00 CET",status:"upcoming",
+  e1:"🔴",e2:"🔵"
+ }
+];
+
+// NEWS DATA
+
+const news = [
+ {
+  icon:"🏆",
+  tag:"CHAMPIONS LEAGUE",
+  title:"The road to European glory",
+  description:"Follow the biggest teams competing for European football's biggest club prize."
+ },
+ {
+  icon:"⚽",
+  tag:"MATCHDAY",
+  title:"Big European nights are coming",
+  description:"Get ready for another exciting round of Champions League football."
+ },
+ {
+  icon:"📊",
+  tag:"STATISTICS",
+  title:"Track the stars",
+  description:"Follow goals, assists and performances throughout the competition."
+ }
+];
+
+// SAMPLE STANDINGS
+
+const teams = [
+ ["Arsenal",0,0],
+ ["Real Madrid",0,0],
+ ["Manchester City",0,0],
+ ["Barcelona",0,0],
+ ["Bayern Munich",0,0],
+ ["Liverpool",0,0]
+];
+
+function showMatches(list){
+ const box=document.getElementById("matches");
+
+ if(!list.length){
+  box.innerHTML="<p>No matches available in this category.</p>";
+  return;
+ }
+
+ box.innerHTML=list.map(m=>`
+  <div class="card">
+   <div class="match-top">
+    <span>${m.date} • ${m.time}</span>
+    <span class="${m.status==='live'?'live':''}">
+     ${m.status.toUpperCase()}
+    </span>
+   </div>
+   <div class="teams">
+    <div class="team">
+     <div class="crest">${m.e1}</div>
+     ${m.home}
+    </div>
+    <div class="score">${m.h} - ${m.a}</div>
+    <div class="team">
+     <div class="crest">${m.e2}</div>
+     ${m.away}
+    </div>
+   </div>
+  </div>
+ `).join("");
+}
+
+function filterMatches(status,button){
+ document.querySelectorAll(".filters button")
+ .forEach(b=>b.classList.remove("active"));
+
+ button.classList.add("active");
+
+ const filtered=status==="all"
+ ?matches
+ :matches.filter(m=>m.status===status);
+
+ showMatches(filtered);
+}
+
+function showNews(){
+ document.getElementById("newsList").innerHTML=
+ news.map(n=>`
+  <div class="card news-card">
+   <div class="news-image">${n.icon}</div>
+   <br>
+   <span class="tag">${n.tag}</span>
+   <h3>${n.title}</h3>
+   <p>${n.description}</p>
+  </div>
+ `).join("");
+}
+
+function showFixtures(){
+ document.getElementById("fixtureList").innerHTML=
+ matches.filter(m=>m.status==="upcoming")
+ .map(m=>`
+  <div class="card">
+   <div class="match-top">${m.date} • ${m.time}</div>
+   <div class="teams">
+    <div class="team">${m.e1}<br>${m.home}</div>
+    <b>VS</b>
+    <div class="team">${m.e2}<br>${m.away}</div>
+   </div>
+  </div>
+ `).join("");
+}
+
+function showStandings(){
+ document.getElementById("standings").innerHTML=
+ teams.map((t,i)=>`
+  <tr>
+   <td>${i+1}</td>
+   <td>${t[0]}</td>
+   <td>${t[1]}</td>
+   <td>0</td><td>0</td><td>0</td>
+   <td>${t[2]}</td>
+  </tr>
+ `).join("");
+}
+
+// START WEBSITE
+
+showMatches(matches);
+showNews();
+showFixtures();
+showStandings();
+
+</script>
+
+</body>
+</html>
